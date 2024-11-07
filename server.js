@@ -6,8 +6,9 @@ import cors from 'cors'
 import morgan from "morgan"
 
 const app = express()
+app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 app.use(morgan())
-app.use(cors());
+// app.use(cors());
 app.use(express.json())
 dotenv.config()
 

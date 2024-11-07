@@ -53,7 +53,10 @@ export const Register= async (req,res)=>{
         const Emailexist = await User.findOne({email : email});
         console.log(Emailexist,"Emailexist")
         if(Emailexist){
-            return res.json({message:"Email exist already",success:false})
+            return res.json({
+                message:"Email exist already", 
+                success:false,
+            })
         }
 
         const hashedPassword = await bcrypt.hash(password, 10)
