@@ -1,9 +1,13 @@
 import express from "express"
-
 import allRoutes from "./routes/index.js"
 import dotenv from "dotenv"
+import mongoose from "mongoose"
+import cors from 'cors'
+import morgan from "morgan"
 
 const app = express()
+app.use(morgan())
+app.use(cors());
 app.use(express.json())
 dotenv.config()
 
@@ -13,6 +17,8 @@ app.get("/",(req,res)=>{
 })
 
 app.use('/api/v1', allRoutes)
+
+mongoose.connect(process.env.MONGODBURL).then(()=>{console.log("Mongo Connected")})
 
 app.listen(process.env.PORT,()=>{
     console.log("Running on port 8000")
