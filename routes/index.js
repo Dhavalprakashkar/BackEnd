@@ -1,11 +1,11 @@
 import { Router } from "express";
 import authRoutes from "./auth.routes.js"
-import userRoutes from "./user.routes.js";
+import Productroutes from "./productRoutes.js";;
 
 const routes = Router();
 
 routes.use('/auth', authRoutes);
-routes.use('/user', userRoutes);
+routes.use("/products",Productroutes)
 // routes.use('/admin', adminRoutes);
 // routes.use('/kyc', kycRoutes);
 
