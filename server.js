@@ -4,6 +4,7 @@ import dotenv from "dotenv"
 import mongoose from "mongoose"
 import cors from 'cors'
 import morgan from "morgan"
+import cookieParser from "cookie-parser"
 
 const app = express()
 app.use(cors({ origin: "http://localhost:3000", credentials: true }));
@@ -11,6 +12,7 @@ app.use(morgan())
 // app.use(cors());
 app.use(express.json())
 dotenv.config()
+app.use(cookieParser());
 
 app.get("/",(req,res)=>{
     res.send("Home Page");

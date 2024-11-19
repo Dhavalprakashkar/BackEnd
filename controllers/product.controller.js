@@ -3,10 +3,10 @@ import productModel from "../models/Productschema.js"
 export const createProduct=async(req,res)=>{
 
     try{
-        const{productName,productCategory,productPrice,productQuantity,productImage}=req.body
+        const{productName,productCategory,productPrice,productQuantity,productImage}=req.body.productData
         const{userId}=req.body
         if(!productName || !productCategory || !productPrice || !productQuantity || !productImage || !userId){
-            return res.json({message:"all fields mandatory",success:true})
+            return res.json({message:"all fields mandatory",success:false})
         }
         const Newuser=productModel({
             Name:productName,
