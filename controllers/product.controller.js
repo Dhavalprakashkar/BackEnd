@@ -58,3 +58,95 @@ export const viewProducts=async(req,res)=>{
 
 
 }
+
+export const singleproductData=async (req,res)=>{
+    try{
+        const{productId}=req.params
+        console.log("params",req.params)
+        if(!productId){
+            return res.json({message:"ID missing",success:false})
+        }
+
+        const productdata=await productModel.findById(productId)
+        if(!productdata){
+        return res.json({
+            success:false,
+            message:"prod not found"
+        })
+    }
+    
+
+        return res.json({
+            success:true,
+            productdata
+        })
+    }
+    
+    catch(error){
+        return res.json({
+            message:"oops something went wrong",
+            success:false
+        })
+        
+
+    }
+}
+
+export const filterProducts=async (req,res)=>{
+    try{
+        const{category}=req.body
+        let query={}
+        if(category){
+            query={Category:category}
+        }
+        const allproducts=await productModel.find(query)
+       
+    
+
+        return res.json({
+            success:true,
+            allproducts
+           
+        })
+    }
+    
+    catch(error){
+        return res.json({
+            message:"oops something went wrong",
+            success:false
+        })
+        
+
+    }
+}
+
+export const sortProducts=async (req,res)=>{
+    try{
+        const{sortMethod}=req.body;
+        let sortQuery={}
+        if(sortMethod=="lowtoHigh"){
+            sortQuery={Price:1,}
+
+        }
+        else{
+            sortQuery={Price:-1,}
+
+        }
+        console.log(sortQuery,"sortQuery",":",sortMethod,"sortMethod")
+        const products=await productModel.find({}).sort(sortQuery)
+         return res.json({
+            success:true,
+            products
+           
+        })
+    }
+    
+    catch(error){
+        return res.json({
+            message:"oops something went wrong",
+            success:false
+        })
+        
+
+    }
+}
